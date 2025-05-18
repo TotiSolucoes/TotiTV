@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TotiTV - Sua Melhor Experiência em IPTV</title>
+    <style>
+        :root {
+            --primary: #FFD700;
+            --secondary: #000000;
+            --accent: #FFB300;
+            --light: #f5f5f5;
+            --dark: #111111;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/api/placeholder/1200/600');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary);
+        }
+        
+        .plans {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .plan-card {
+            background-color: var(--secondary);
+            border-radius: 10px;
+            overflow: hidden;
+            width: 300px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        
+        .plan-header {
+            background-color: var(--primary);
+            color: var(--secondary);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        
+        .plan-price span {
+            font-size: 1rem;
+            font-weight: normal;
+        }
+        
+        .plan-features {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .plan-features ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .plan-features li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .plan-features li::before {
+            content: "✓";
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--secondary);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+        
+        .features {
+            margin: 4rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .testimonials {
+            background-color: rgba(0,0,0,0.2);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial {
+            background-color: var(--secondary);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .faq {
+            margin: 4rem 0;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1.5rem;
+        }
+        
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+        
+        .cta {
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/api/placeholder/1200/400');
+            background-size: cover;
+            background-position: center;
+            padding: 4rem 2rem;
+            margin: 2rem 0;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            background-color: var(--secondary);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .social-icons {
+            margin: 1.5rem 0;
+        }
+        
+        .social-icons a {
+            color: var(--light);
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+        
+        .footer-links a {
+            color: var(--light);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .plans {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">TotiTV</div>
+        <div class="tagline">Sua melhor experiência em IPTV</div>
+    </header>
+    
+    <section class="hero">
+        <h2>Assista a tudo o que você ama!</h2>
+        <p>Acesso a milhares de canais e conteúdos sob demanda com a melhor qualidade e estabilidade do mercado.</p>
+        <a href="#plans" class="btn">Ver Planos</a>
+    </section>
+    
+    <div class="container">
+        <section id="plans">
+            <h2 class="section-title">Nossos Planos</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Escolha o plano que melhor se adapta às suas necessidades</p>
+            
+            <div class="plans">
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-name">Plano Mensal</div>
+                        <div class="plan-price">R$ 29,90 <span>/mês</span></div>
+                    </div>
+                    <div class="plan-features">
+                        <ul>
+                            <li>Mais de 10.000 canais</li>
+                            <li>Filmes e séries on demand</li>
+                            <li>Qualidade HD e Full HD</li>
+                            <li>Suporte técnico 24/7</li>
+                            <li>Compatível com todos dispositivos</li>
+                        </ul>
+                        <a href="https://wa.me/5585981766722?text=Olá! Estou interessado nos planos de IPTV da TotiTV" target="_blank" class="btn">Assinar Agora</a>
+                    </div>
+                </div>
+                
+                <div class="plan-card" style="transform: scale(1.05); border: 2px solid var(--primary);">
+                    <div class="plan-header">
+                        <div class="plan-name">Plano Semestral</div>
+                        <div class="plan-price">R$ 139,90 <span>/6 meses</span></div>
+                    </div>
+                    <div class="plan-features">
+                        <ul>
+                            <li>Mais de 10.000 canais</li>
+                            <li>Filmes e séries on demand</li>
+                            <li>Qualidade HD e Full HD</li>
+                            <li>Suporte técnico 24/7</li>
+                            <li>Compatível com todos dispositivos</li>
+                            <li><strong>Economia de 22%</strong></li>
+                        </ul>
+                        <a href="https://wa.me/5585981766722?text=Olá! Estou interessado no Plano Mensal da TotiTV" target="_blank" class="btn">Assinar Agora</a>
+                    </div>
+                </div>
+                
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-name">Plano Anual</div>
+                        <div class="plan-price">R$ 239,90 <span>/ano</span></div>
+                    </div>
+                    <div class="plan-features">
+                        <ul>
+                            <li>Mais de 10.000 canais</li>
+                            <li>Filmes e séries on demand</li>
+                            <li>Qualidade HD e Full HD</li>
+                            <li>Suporte técnico 24/7</li>
+                            <li>Compatível com todos dispositivos</li>
+                            <li><strong>Economia de 33%</strong></li>
+                            <li><strong>2 meses grátis</strong></li>
+                        </ul>
+                        <a href="#contato" class="btn">Assinar Agora</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2 class="section-title">Por que escolher a TotiTV?</h2>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">📺</div>
+                    <h3>Milhares de Canais</h3>
+                    <p>Acesso a mais de 10.000 canais nacionais e internacionais, incluindo esportes, filmes, notícias e muito mais.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🎬</div>
+                    <h3>Conteúdo On Demand</h3>
+                    <p>Filmes, séries e programas para assistir quando e onde quiser, sem limites.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <h3>Multiplataforma</h3>
+                    <p>Assista em Smart TVs, smartphones, tablets, computadores e outros dispositivos compatíveis.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Alta Estabilidade</h3>
+                    <p>Servidores robustos garantindo transmissão sem travamentos e com alta disponibilidade.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Segurança Total</h3>
+                    <p>Navegação segura e protegida, sem riscos de vazamento de dados ou informações pessoais.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🎮</div>
+                    <h3>Fácil de Usar</h3>
+                    <p>Interface intuitiva e amigável para que você aproveite seu conteúdo sem complicações.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="testimonials">
+            <h2 class="section-title">O que dizem nossos clientes</h2>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p>"Assinei o plano anual e não me arrependo! Qualidade impressionante e zero travamentos. Recomendo a todos!"</p>
+                    <div class="testimonial-author">- Carlos Silva</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p>"O suporte técnico é excelente! Tive uma dúvida sobre a instalação e me atenderam prontamente. Muito satisfeita!"</p>
+                    <div class="testimonial-author">- Maria Oliveira</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p>"A qualidade dos canais é incrível! Assisto tudo em Full HD e a estabilidade é surpreendente. Melhor IPTV que já experimentei."</p>
+                    <div class="testimonial-author">- João Santos</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="faq">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">O que é IPTV?</div>
+                <div class="faq-answer">IPTV (Internet Protocol Television) é uma tecnologia que permite assistir canais de TV e conteúdos sob demanda através da internet, sem necessidade de antena ou cabo tradicional.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Como funciona o serviço da TotiTV?</div>
+                <div class="faq-answer">Ao assinar um de nossos planos, você receberá instruções de acesso para configurar o serviço em seus dispositivos. O acesso é feito através de aplicativos específicos que nós recomendamos para uma melhor experiência.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Em quais dispositivos posso assistir?</div>
+                <div class="faq-answer">Nosso serviço é compatível com Smart TVs, smartphones (Android e iOS), tablets, computadores, TVs Box e outros dispositivos que suportem aplicativos de IPTV.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Qual velocidade de internet preciso ter?</div>
+                <div class="faq-answer">Recomendamos uma internet com velocidade mínima de 15Mbps para uma experiência sem travamentos. Para conteúdos em Full HD, o ideal é ter 25Mbps ou mais.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Como é feito o pagamento?</div>
+                <div class="faq-answer">Aceitamos diversas formas de pagamento, incluindo cartão de crédito, boleto bancário, Pix e transferência bancária.</div>
+            </div>
+        </section>
+        
+        <section class="cta">
+            <h2>Pronto para uma nova experiência em entretenimento?</h2>
+            <p>Assine agora e comece a assistir seus canais favoritos com a melhor qualidade!</p>
+            <a href="#contato" class="btn">Assinar Agora</a>
+        </section>
+        
+        <section id="contato">
+            <h2 class="section-title">Entre em Contato</h2>
+            
+            <div style="max-width: 600px; margin: 0 auto; background-color: rgba(0,0,0,0.2); padding: 2rem; border-radius: 10px; text-align: center;">
+                <h3 style="margin-bottom: 1.5rem; color: var(--light);">Fale diretamente conosco pelo WhatsApp</h3>
+                <p style="margin-bottom: 2rem;">Clique no botão abaixo para conversar com um de nossos atendentes e conhecer mais sobre nossos planos de IPTV.</p>
+                
+                <a href="https://wa.me/5585981766722?text=Olá! Estou interessado nos planos de IPTV da TotiTV" target="_blank" class="btn" style="display: inline-block; padding: 1rem 2rem; font-size: 1.2rem;">
+                    <span style="margin-right: 10px;">📱</span> Falar pelo WhatsApp
+                </a>
+                
+                <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.7;">Nosso horário de atendimento: Segunda a Sábado, das 8h às 22h</p>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-logo">TotiTV</div>
+        <p>Sua melhor experiência em IPTV</p>
+        
+        <div class="social-icons">
+            <a href="#"><span>📱</span></a>
+            <a href="#"><span>👍</span></a>
+            <a href="#"><span>📸</span></a>
+            <a href="#"><span>📞</span></a>
+        </div>
+        
+        <div class="footer-links">
+            <a href="#">Início</a>
+            <a href="#plans">Planos</a>
+            <a href="#contato">Contato</a>
+            <a href="#">Termos de Uso</a>
+            <a href="#">Política de Privacidade</a>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 TotiTV - Todos os direitos reservados
+        </div>
+    </footer>
+</body>
+</html>
